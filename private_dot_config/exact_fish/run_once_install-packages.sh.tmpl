@@ -1,0 +1,19 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+{{- if eq .chezmoi.osRelease.id "arch" }}
+# Install fish
+sudo pacman -S fish
+{{- end}}
+
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+# Install fish
+sudo apt install fish
+{{- end }}
+
+# Install omf
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+# Install starship shell prompt
+curl -sS https://starship.rs/install.sh | sh
+# Install plugin
+omf install bass
+{{- end }}
