@@ -11,9 +11,11 @@ sudo apt install fish
 {{- end }}
 
 # Install omf
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
+fish install --path=~/.local/share/omf --config=~/.config/omf
 # Install starship shell prompt
 curl -sS https://starship.rs/install.sh | sh
 # Install plugin
 omf install bass
+chsh -s $(which fish)
 {{- end }}

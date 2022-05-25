@@ -4,7 +4,9 @@ set PATH $PATH $HOME/.go/bin
 set PATH $PATH $HOME/.cargo/bin
 set PATH $PATH $HOME/.yarn/bin
 set PATH $PATH $HOME/.local/bin
-set PATH $PATH (find $HOME/.scripts/ -type d ) 
+if test -e $HOME/.script
+  set PATH $PATH (find $HOME/.scripts/ -type d ) 
+end
 
 # Abbreviation
 abbr -a ws 'sudo systemctl start windscribe'
@@ -21,8 +23,7 @@ set -gx GOPATH ~/.go
 #-----------------------------------------------------
 #Aliases
 #-------------------------------------------------------
-alias ssh="kitty +kitten ssh"
-alias vim="nvim"
+alias sshk="kitty +kitten ssh"
 #alias lf lfrun
 alias color "colorscript random"
 alias ll "exa --icons -l -g"
