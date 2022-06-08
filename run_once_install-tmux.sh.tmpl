@@ -1,0 +1,14 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+{{- if eq .chezmoi.osRelease.id "arch" }}
+# Install fish
+sudo pacman -S tmux --noconfirm
+{{- end }}
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+# Install fish
+sudo apt-get install tmux
+{{- end }}
+# Install tmux package manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+{{- end }}
+
