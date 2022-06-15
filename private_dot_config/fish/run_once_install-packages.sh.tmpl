@@ -2,20 +2,30 @@
 #!/bin/bash
 {{- if eq .chezmoi.osRelease.id "arch" }}
 # Install fish
-sudo pacman -S fish
+if ! pacman -Qs fish > /dev/null; then
+  sudo pacman -S fish
+fi
 {{- end}}
 
 {{- if eq .chezmoi.osRelease.id "ubuntu" }}
 # Install fish
-sudo apt install fish
+if ! apt-cache show fish > /dev/null; then
+  sudo apt install fish
+fi
 {{- end }}
 
 # Install omf
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
-fish install --path=~/.local/share/omf --config=~/.config/omf
+if [ ! -d ~/.local/share/omf ]; then
+  curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
+  fish install --path=~/.local/share/omf --config=~/.config/omf
+fi
+fish -c "omf install bass"
+if [[ ! "$SHELL" =~ .*"fish".* ]]; then
+  chsh -s /bin/fish 
+fi
 # Install starship shell prompt
-curl -sS https://starship.rs/install.sh | sh
+if [ ! -f /usr/local/bin/starship ]; then
+  curl -sS https://starship.rs/install.sh | sh 2> /dev/null
+fi
 # Install plugin
-omf install bass
-chsh -s $(which fish)
 {{- end }}
