@@ -6,3 +6,5 @@ end
 require "m3d.lsp.lsp-installer"
 require("m3d.lsp.handlers").setup()
 require "m3d.lsp.null-ls"
+require "m3d.lsp.go"
+-- require "m3d.lsp.dap"

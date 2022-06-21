@@ -1,0 +1,23 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+{{- if eq .chezmoi.osRelease.id "arch" }}
+# Install fish
+if ! pacman -Qs fish > /dev/null; then
+  sudo pacman -S fish
+fi
+{{- end}}
+
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+# Install nvim
+erorr=$(dpkg -s neovim 2>&1 > /dev/null)
+if [ ! -z "$erorr" ]; then
+  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo apt-get update
+  sudo apt-get install neovim python3-pynvim -y
+fi
+{{- end }}
+# Install packer
+if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+{{- end }}

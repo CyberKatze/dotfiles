@@ -16,7 +16,7 @@ local options = {
   splitbelow = true,                       -- force all horizontal splits to go below current window
   splitright = true,                       -- force all vertical splits to go to the right of current window
   swapfile = false,                        -- creates a swapfile
-  -- termguicolors = true,                    -- set term gui colors (most terminals support this)
+  termguicolors = true,                    -- set term gui colors (most terminals support this)
  timeoutlen = 2000,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true,                         -- enable persistent undo
   updatetime = 300,                        -- faster completion (4000ms default)
@@ -33,7 +33,7 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff=15 ,
   sidescroll=1,
-  guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  guifont = "CaskaydiaCove NF",               -- the font used in graphical neovim applications
   foldenable= false,
 }
 -- "https://github.com/m3dsh"
@@ -42,6 +42,13 @@ vim.opt.shortmess:append "c"
 
 for k, v in pairs(options) do
   vim.opt[k] = v
+end
+local gui = {
+neovide_transparency=0.85,
+neovide_cursor_vfx_mode = "railgun",
+}
+for k, v in pairs(gui) do
+  vim.g[k] = v
 end
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
