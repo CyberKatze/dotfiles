@@ -70,7 +70,7 @@ renderer = {
     enable = true,
     auto_open = true,
   },
-  disable_netrw = true,
+  disable_netrw = false,
   hijack_netrw = true,
   open_on_setup = false,
   ignore_ft_on_setup = {

@@ -94,7 +94,7 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Open link, or path with graphical app https://github.com/m3dsh
-keymap("n","gx", ":!open <cWORD><cr>", opts)
+-- keymap("n","gx", ":!open <cWORD><cr>", opts)
 
 -- Alpha
 keymap("n","<leader>a", "<cmd>Alpha<cr>", opts)

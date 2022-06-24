@@ -19,17 +19,26 @@ dapui.setup {
     repl = "r",
     toggle = "t",
   },
-  sidebar = {
+  layout = {
     -- You can change the order of elements in the sidebar
-    elements = {
-      -- Provide as ID strings or tables with "id" and "size" keys
-      {
-        id = "scopes",
-        size = 0.25, -- Can be float or integer > 1
+    {
+      elements = {
+        -- Provide as ID strings or tables with "id" and "size" keys
+        {
+          id = "scopes",
+          size = 0.25, -- Can be float or integer > 1
+        },
+        { id = "breakpoints", size = 0.25 },
+        { id = "stacks", size = 0.25 },
+        { id = "watches", size = 00.25 },
       },
-      { id = "breakpoints", size = 0.25 },
-      { id = "stacks", size = 0.25 },
-      { id = "watches", size = 00.25 },
+      size = 40,
+      position = "left", -- Can be "left", "right", "top", "bottom"
+    },
+    {
+      elements = { "repl" },
+      size = 10,
+      position = "bottom", -- Can be "left", "right", "top", "bottom"
     },
     size = 40,
     position = "left", -- Can be "left", "right", "top", "bottom"
@@ -49,7 +58,7 @@ dapui.setup {
   },
   windows = { indent = 1 },
 }
-dap.adapters.go = function(callback, config)
+dap.adapters.go = function(callback, _)
   local stdout = vim.loop.new_pipe(false)
   local handle
   local pid_or_err

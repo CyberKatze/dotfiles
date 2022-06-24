@@ -17,7 +17,7 @@ local options = {
   splitright = true,                       -- force all vertical splits to go to the right of current window
   swapfile = false,                        -- creates a swapfile
   termguicolors = true,                    -- set term gui colors (most terminals support this)
- timeoutlen = 2000,                        -- time to wait for a mapped sequence to complete (in milliseconds)
+  timeoutlen = 2000,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true,                         -- enable persistent undo
   updatetime = 300,                        -- faster completion (4000ms default)
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
@@ -44,7 +44,7 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 local gui = {
-neovide_transparency=0.85,
+neovide_transparency=0.95,
 neovide_cursor_vfx_mode = "railgun",
 }
 for k, v in pairs(gui) do
@@ -55,3 +55,23 @@ vim.cmd [[set iskeyword+=-]]
 -- vim.cmd[[set list listchars=trail:·,nbsp:·]] -- see the space at the end and begning
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 vim.cmd [[set autoread hidden]]
+vim.cmd[[
+let s:fontsize = 12
+function! AdjustFontSize(amount)
+  let s:fontsize = s:fontsize+a:amount
+    :execute "set guifont=CaskaydiaCove\\ NF:h" . s:fontsize
+endfunction
+
+noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
+noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
+inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
+inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
+function Neovide_fullscreen()
+    if g:neovide_fullscreen == v:true
+        let g:neovide_fullscreen=v:false
+    else
+        let g:neovide_fullscreen=v:true
+    endif
+endfunction
+map <F11> :call Neovide_fullscreen()<cr>
+]]
