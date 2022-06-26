@@ -32,10 +32,8 @@ alias tlmgr "/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
 #--------------------------------------------------------
 #Function
 #--------------------------------------------------------
-# source nvm
-function nvm
-    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
-end
+# load nvm
+load_nvm > /dev/stderr
 
 # Source rvm Ruby Version Manager
 function rvm
