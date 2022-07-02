@@ -44,7 +44,7 @@ end
 
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
       augroup lsp_document_highlight
@@ -68,9 +68,10 @@ end
 local function lsp_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true }
   local rc = client.server_capabilities
-  -- for k, v in pairs(client.server_capabilities) do
-  --   print(k)
-  -- end
+  -- Print all the server capabilities
+  -- for k, _ in pairs(client.server_capabilities) do
+  --    print(k)
+  --  end
   map_cond(rc.declarationProvider, bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- not Sure about this one
   map_cond(rc.definitionProvider, bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   map_cond(rc.implementationProvider, bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)

@@ -183,3 +183,7 @@ keymap("n","<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", opts)
 keymap("n","<leader>tf", "<cmd>ToggleTerm direction=float<cr>", opts)
 keymap("n","<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", opts)
 keymap("n","<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", opts)
+
+-- Luasnip
+keymap("n","<Tab>", "<cmd>lua require('luasnip').jump(1)<Cr>", opts)
+keymap("n","<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", opts)

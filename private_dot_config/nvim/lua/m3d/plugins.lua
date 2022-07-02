@@ -83,6 +83,7 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig"
   use "williamboman/nvim-lsp-installer"
   use "tamago324/nlsp-settings.nvim"
+  use "b0o/SchemaStore.nvim"
   use "jose-elias-alvarez/null-ls.nvim"
   use "ray-x/go.nvim"
   use "ray-x/guihua.lua" -- floating window support
