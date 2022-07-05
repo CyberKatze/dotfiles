@@ -7,7 +7,7 @@ end
 
 M.servers = {
   "cssls",
-  -- "gopls",
+  "gopls",
   "svelte",
   "cssmodules_ls",
   "emmet_ls",
