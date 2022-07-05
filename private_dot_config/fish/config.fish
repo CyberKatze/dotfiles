@@ -4,7 +4,7 @@ set PATH $PATH $HOME/.go/bin
 set PATH $PATH $HOME/.cargo/bin
 set PATH $PATH $HOME/.yarn/bin
 set PATH $PATH $HOME/.local/bin
-if test -e $HOME/.script
+if test -e $HOME/.scripts
   set PATH $PATH (find $HOME/.scripts/ -type d ) 
 end
 
