@@ -109,6 +109,7 @@ return packer.startup(function(use)
 
   -- Discord Presence
   use "andweeb/presence.nvim"
+  use "ur4ltz/surround.nvim"
 
   use {
     "iamcco/markdown-preview.nvim",

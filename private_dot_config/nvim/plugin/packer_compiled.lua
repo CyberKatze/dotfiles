@@ -276,6 +276,11 @@ _G.packer_plugins = {
     path = "/home/cyberkatze/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["surround.nvim"] = {
+    loaded = true,
+    path = "/home/cyberkatze/.local/share/nvim/site/pack/packer/start/surround.nvim",
+    url = "https://github.com/ur4ltz/surround.nvim"
+  },
   ["telescope-dap.nvim"] = {
     loaded = true,
     path = "/home/cyberkatze/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim",
