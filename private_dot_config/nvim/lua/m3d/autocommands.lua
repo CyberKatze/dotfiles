@@ -79,11 +79,10 @@ autocmd CursorMoved * call DetectRegChangeAndUpdateMark()
 autocmd InsertLeave * execute 'normal! mM'
 
 " }}}
-
+augroup _lsp
+autocmd!
+autocmd BufWritePre *.lua lua vim.lsp.buf.format {async = false}
+autocmd BufWritePre *.go :silent! lua vim.lsp.buf.format {async = false}
+augroup end
 ]]
 
--- Autoformat
--- augroup _lsp
---   autocmd!
---   autocmd BufWritePre * lua vim.lsp.buf.formatting()
--- augroup end

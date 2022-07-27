@@ -1,10 +1,25 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 {{- if eq .chezmoi.osRelease.id "arch" }}
-# Install fish
-if ! pacman -Qs fish > /dev/null; then
-  sudo pacman -S fish
+# Install neovim
+if ! pacman -Q neovim &> /dev/null; then
+  sudo pacman -S neovim
 fi
+
+# install Go
+if ! command -v go &> /dev/null; then
+  sudo pacman -S go
+fi
+# Install rust
+if ! command -v cargo &> /dev/null; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source $HOME/.cargo/env
+fi
+
+if ! command -v stylua &> /dev/null; then
+  cargo install stylua
+fi
+
 {{- end}}
 
 {{- if eq .chezmoi.osRelease.id "ubuntu" }}
@@ -16,8 +31,10 @@ if [ ! -z "$erorr" ]; then
   sudo apt-get install neovim python3-pynvim -y
 fi
 {{- end }}
+
 # Install packer
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
+
 {{- end }}
