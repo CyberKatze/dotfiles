@@ -4,7 +4,7 @@ set PATH $PATH $HOME/.go/bin
 set PATH $PATH $HOME/.cargo/bin
 set PATH $PATH $HOME/.yarn/bin
 set PATH $PATH $HOME/.local/bin
-set PATH $PATH $HOME/.miniconda/bin
+set PATH $PATH $HOME/.miniconda3/bin
 if test -e $HOME/.scripts
   set PATH $PATH (find $HOME/.scripts/ -type d ) 
 end
@@ -62,3 +62,9 @@ end
 # init for startship
 starship init fish | source
 fish_vi_key_bindings
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/m3d/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+
