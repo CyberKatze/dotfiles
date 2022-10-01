@@ -11,6 +11,7 @@ return {
     json = {
       schemas = schemastore.json.schemas(),
     },
+    validate = {enable = true},
   },
   setup = {
     commands = {
