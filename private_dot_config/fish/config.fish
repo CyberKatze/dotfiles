@@ -19,6 +19,9 @@ abbr -a wgdown 'sudo wg-quick down cyberkatze'
 # Enviroment Variables
 set -Ux TERMINAL kitty
 set -Ux RANGER_LOAD_DEFAULT_RC FALSE
+if not test -z WAYLAND_DISPLAY
+  set -Ux MOZ_ENABLE_WAYLAND 1
+end
 set -gx EDITOR (which nvim) 
 set -gx GOPATH ~/.go
 #-----------------------------------------------------
@@ -68,3 +71,6 @@ fish_vi_key_bindings
 eval /home/m3d/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
+
+set proxy_host 88.99.34.51:8889
+set proxy_user m3d
