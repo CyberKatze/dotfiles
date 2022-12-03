@@ -21,9 +21,19 @@ set -Ux TERMINAL kitty
 set -Ux RANGER_LOAD_DEFAULT_RC FALSE
 if not test -z WAYLAND_DISPLAY
   set -Ux MOZ_ENABLE_WAYLAND 1
+  set -Ux SDL_VIDEODRIVER wayland
+  set -Ux _JAVA_AWT_WM_NONREPARENTING 1
+  set -Ux QT_QPA_PLATFORM wayland
+  set -Ux XDG_CURRENT_DESKTOP sway
+  set -Ux XDG_SESSION_DESKTOP sway
+  set -Ux RANGER_LOAD_DEFAULT_RC FALSE
 end
 set -gx EDITOR (which nvim) 
 set -gx GOPATH ~/.go
+
+if test -z $DISPLAY; and test (tty) = "/dev/tty1"
+    sway
+end
 #-----------------------------------------------------
 #Aliases
 #-------------------------------------------------------
@@ -37,14 +47,14 @@ alias tlmgr "/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
 #Function
 #--------------------------------------------------------
 # load nvm
-load_nvm > /dev/stderr
+#load_nvm > /dev/stderr
 
 # Source rvm Ruby Version Manager
-function rvm
-	bass source ~/.rvm/scripts/rvm ';' rvm $argv
-end
+# function rvm
+# 	bass source ~/.rvm/scripts/rvm ';' rvm $argv
+# end
 
-# Add icons to LF_ICONS Variable for lf
+#Add icons to LF_ICONS Variable for lf
 if test -e ~/.config/lf/icons
     set -gx LF_ICONS (sed ~/.config/lf/icons \
     	    -e '/^[ \t]*#/d'       \
@@ -68,7 +78,7 @@ fish_vi_key_bindings
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /home/m3d/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# eval /home/m3d/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
 

@@ -22,6 +22,7 @@ M.servers = {
   "yamlls",
   "bashls",
   "clangd",
+  "texlab",
   -- "rust_analyzer",
   -- "taplo",
 }

@@ -89,7 +89,7 @@ return packer.startup(function(use)
   use "ray-x/go.nvim"
   use "ray-x/guihua.lua" -- floating window support
 
--- Debug
+  -- Debug
   use "mfussenegger/nvim-dap"
   use "theHamsta/nvim-dap-virtual-text"
   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
@@ -117,6 +117,10 @@ return packer.startup(function(use)
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     run = "cd app && yarn install",
+  }
+  -- Latex
+  use {
+    "lervag/vimtex"
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

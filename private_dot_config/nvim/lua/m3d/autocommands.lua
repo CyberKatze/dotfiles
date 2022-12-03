@@ -52,7 +52,7 @@ au FileType,BufRead,BufNewFile *.tex
 let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
 let g:vimtex_compiler_progname = 'nvr'
-let g:vimtex_view_general_viewer = 'qpdfview'
+let g:vimtex_view_general_viewer = 'okular'
 
 " }}}
 
@@ -85,4 +85,3 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.format {async = false}
 autocmd BufWritePre *.go :silent! lua vim.lsp.buf.format {async = false}
 augroup end
 ]]
-
