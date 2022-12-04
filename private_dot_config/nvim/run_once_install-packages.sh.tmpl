@@ -10,14 +10,11 @@ fi
 if ! command -v go &> /dev/null; then
   sudo pacman -S go
 fi
-# Install rust
-if ! command -v cargo &> /dev/null; then
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  source $HOME/.cargo/env
-fi
 
-if ! command -v stylua &> /dev/null; then
-  cargo install stylua
+
+# Install ripgrep
+if ! command -v rg &> /dev/null; then
+   sudo pacman -S ripgrep
 fi
 
 {{- end}}
@@ -30,7 +27,32 @@ if [ ! -z "$erorr" ]; then
   sudo apt-get update
   sudo apt-get install neovim python3-pynvim -y
 fi
+
+# Install ripgrep
+if ! command -v rg &> /dev/null; then
+   sudo apt install ripgrep
+fi
+
+# install Go
+if ! command -v go &> /dev/null; then
+  sudo apt install golang
+fi
 {{- end }}
+
+# Install rust
+if ! command -v cargo &> /dev/null; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source $HOME/.cargo/env
+fi
+
+if ! command -v stylua &> /dev/null; then
+  cargo install stylua
+fi
+
+# Install node
+if ! command -v npm &> /dev/null; then
+  nvm install node 
+fi
 
 # Install packer
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
