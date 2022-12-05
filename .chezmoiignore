@@ -3,4 +3,5 @@
 README.md
 {{- if ne .chezmoi.osRelease.id "arch" }}
 .config/sway/
+.config/waybar/
 {{- end }}
