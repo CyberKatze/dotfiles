@@ -5,4 +5,5 @@ README.md
 .config/sway/
 .config/waybar/
 .config/swaync/
+.config/code-flags.conf
 {{- end }}
