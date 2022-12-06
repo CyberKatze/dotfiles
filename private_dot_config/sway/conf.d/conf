@@ -1,165 +1,99 @@
+# vim:foldmethod=marker
 # Default config for sway
-#
 # Copy this to ~/.config/sway/config and edit it to your liking.
-#
 # Read `man 5 sway` for a complete reference.
-### Variables
-#
+
+# Variables {{{
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $mod1 Mod1
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+
+# Applications
 set $term kitty
 set $Browser "all_proxy=http://127.0.0.1:8889 brave  --enable-features=UseOzonePlatform --ozone-platform=wayland"
-set $code kitty
-set $code_alt code
+set $code code
 set $music spotify
+
 # Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $launcher wofi --show=drun --lines=8 --prompt="" -W 600px 
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
+# }}}
 
-# Toggle control center
-bindsym $mod+Shift+n exec swaync-client -t -sw
+# Idle configuration {{{
+
 # Example configuration:
+exec swayidle -w\
+    timeout 1070 'swaylock -f -C ~/.config/swaylock/config'\
+    timeout 770 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -C ~/.config/swaylock/config'
 
-output eDP-1 pos 0 0 
-output HDMI-A-2 res 1920x1080
-
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
+# }}}
 
-input type:keyboard {
-    xkb_layout us,ir,de(qwerty)
-    xkb_options grp:alt_shift_toggle
-}
-#
-# Example configuration:
-input type:touchpad {
-    dwt enabled
-    tap enabled
-    natural_scroll enabled
-    middle_emulation enabled
-  }
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+# Key bindings {{{
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
-    bindsym $mod+Ctrl+Return workspace 1;exec $term
+  # Reload the configuration file
+  bindsym $mod+Shift+c reload
 
-    # Start a Browser
-    bindsym $mod+g exec $Browser
-    bindsym $mod+Ctrl+g workspace 6;exec $Browser
+  # Exit sway (logs you out of your Wayland session)
+  bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    # Start a music
-    bindsym $mod+m exec $music
-    bindsym $mod+Ctrl+m workspace 4;exec $music
+# Application {{{
 
-    # Start a code
-    bindsym $mod+c exec $code
-    bindsym $mod+Ctrl+c workspace 7;exec $code
-    bindsym $mod+Mod1+c workspace 7;exec $code_alt
+  # Start a terminal
+  bindsym $mod+Return exec $term
+  bindsym $mod+Ctrl+Return workspace 1;exec $term
 
-    # Start a Superproductivity
-    bindsym $mod+apostrophe exec "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
-    bindsym $mod+Ctrl+apostrophe workspace 3;exec "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+  # Start a Browser
+  bindsym $mod+g exec $Browser
+  bindsym $mod+Ctrl+g workspace 6;exec $Browser
 
+  # Start a music
+  bindsym $mod+m exec $music
+  bindsym $mod+Ctrl+m workspace 4;exec $music
 
-    # Start a Obsidian
-    bindsym $mod+o exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
-    bindsym $mod+Ctrl+o workspace 3;exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+  # Start a code
+  bindsym $mod+c exec $code
+  bindsym $mod+Ctrl+c workspace 7;exec $code
 
-    # Kill focused window
-    bindsym $mod+q kill
+  # Start a Superproductivity
+  bindsym $mod+apostrophe exec "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+  bindsym $mod+Ctrl+apostrophe workspace 3;exec "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
 
-    # Start your dmenu
-    bindsym $mod+d exec $menu
+  # Start a Obsidian
+  bindsym $mod+o exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+  bindsym $mod+Ctrl+o workspace 3;exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
 
-    # Start your launcher
-    bindsym $mod+x exec $launcher
+  # Kill focused window
+  bindsym $mod+q kill
 
-    #Start emoji picker
-    bindsym $mod1+e exec /sbin/wofi-emoji
+  # Start your dmenu
+  bindsym $mod+d exec $menu
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+  # Start your launcher
+  bindsym $mod+x exec $launcher
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+  #Start emoji picker
+  bindsym $mod1+e exec /sbin/wofi-emoji
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+  # Toggle control center
+  bindsym $mod+Shift+n exec swaync-client -t -sw
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
+# }}}
+
+# Workspaces {{{
+
     # Switch to workspace
     bindsym $mod+1 workspace number 1 
     bindsym $mod+2 workspace number 2
@@ -192,60 +126,83 @@ input type:touchpad {
       }
         bindsym $mod+Bracketleft focus output right
         bindsym $mod+Bracketright focus output left
-      workspace  {
-        1 output eDP-1
-        2 output eDP-1
-        3 output eDP-1
-        4 output eDP-1
-        5 output eDP-1
-        6 output HDMI-A-2 DP-1 eDP-1 
-        7 output HDMI-A-2 DP-1 eDP-1 
-        8 output HDMI-A-2 DP-1 eDP-1 
-        9 output HDMI-A-2 DP-1 eDP-1 
-        10 output HDMI-A-2 DP-1 eDP-1 
-      }
 
+# }}}
 
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+# Moving around {{{
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+  # Move your focus around
+  bindsym $mod+$left focus left
+  bindsym $mod+$down focus down
+  bindsym $mod+$up focus up
+  bindsym $mod+$right focus right
+  # Or use $mod+[up|down|left|right]
+  bindsym $mod+Left focus left
+  bindsym $mod+Down focus down
+  bindsym $mod+Up focus up
+  bindsym $mod+Right focus right
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+  # Move the focused window with the same, but add Shift
+  bindsym $mod+Shift+$left move left
+  bindsym $mod+Shift+$down move down
+  bindsym $mod+Shift+$up move up
+  bindsym $mod+Shift+$right move right
+  # Ditto, with arrow keys
+  bindsym $mod+Shift+Left move left
+  bindsym $mod+Shift+Down move down
+  bindsym $mod+Shift+Up move up
+  bindsym $mod+Shift+Right move right
+# }}}
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+# Layout stuff {{{
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space workspace back_and_forth
+  # You can "split" the current object of your focus with
+  # $mod+b or $mod+v, for horizontal and vertical splits
+  # respectively.
+  bindsym $mod+b splith
+  bindsym $mod+v splitv
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+  # Switch the current container between different layout styles
+  bindsym $mod+s layout stacking
+  bindsym $mod+w layout tabbed
+  bindsym $mod+e layout toggle split
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+  # Make the current focus fullscreen
+  bindsym $mod+f fullscreen
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
+  # Toggle the current focus between tiling and floating mode
+  bindsym $mod+Shift+space floating toggle
+
+  # Swap focus between the tiling area and the floating area
+  bindsym $mod+space workspace back_and_forth
+
+  # Move focus to the parent container
+  bindsym $mod+a focus parent
+# }}}
+
+# Scratchpad {{{
+
+  # Sway has a "scratchpad", which is a bag of holding for windows.
+  # You can send windows there and get them back later.
+
+  # Move the currently focused window to the scratchpad
+  bindsym $mod+Shift+minus move scratchpad
+
+  # Show the next scratchpad window or hide the focused scratchpad window.
+  # If there are multiple scratchpad windows, this command cycles through them.
+  bindsym $mod+minus scratchpad show
+
+# }}}
+
+# Resizing containers {{{
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -268,20 +225,32 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Volume Control
+# }}}
+
+# Volume Control {{{
+
   bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
   bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
   bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
-#Brightness Control
-bindsym --locked XF86MonBrightnessUp exec light -A 5
-bindsym --locked XF86MonBrightnessDown exec light -U 5
-#
-# Status Bar:
-# ScreenShot
+# }}}
+
+# Brightness Control {{{
+
+  bindsym --locked XF86MonBrightnessUp exec light -A 5
+  bindsym --locked XF86MonBrightnessDown exec light -U 5
+
+# }}}
+
+# ScreenShot {{{
+  
  bindsym $mod+p       exec grimshot --notify save area
  bindsym $mod+Ctrl+p exec grimshot --notify copy area
  bindsym $mod+$mod1+p  exec grimshot --notify save output
  bindsym $mod+Shift+p  exec grimshot --notify save window
+
+# }}}
+
+# }}}
 
 include /etc/sway/config.d/*
