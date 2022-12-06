@@ -9,11 +9,20 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec nm-applet --indicator
 
-# Notification Daemon
+# Notification Daemon {{{
+
 exec swaync
 
-# Auto Tiling 
+# }}}
+
+# Auto Tiling {{{
+
 exec autotiling
 
-# Sway Fader
+#}}}
+
+# Sway Fader {{{
+
 exec $HOME/.config/sway/scripts/swayfader.py
+
+#}}}
