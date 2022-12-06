@@ -3,8 +3,6 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
-exec autotiling
-exec $HOME/.config/sway/scripts/swayfader.py
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -32,23 +30,14 @@ set $launcher wofi --show=drun --lines=8 --prompt="" -W 600px
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-# Notification Daemon
-exec swaync
 
 # Toggle control center
 bindsym $mod+Shift+n exec swaync-client -t -sw
 # Example configuration:
 
-# Set random wallpaper every time you log in
-exec_always /home/m3d/.cargo/bin/setwall random /home/m3d/Pictures/Wallpapers/ -c sway
 output eDP-1 pos 0 0 
 output HDMI-A-2 res 1920x1080
-# For Apps Asking for more previleges
-exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec_always nm-applet --indicator
+
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
