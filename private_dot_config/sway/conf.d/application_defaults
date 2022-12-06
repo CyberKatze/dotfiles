@@ -7,8 +7,8 @@ for_window [app_id="firefox"] focus
 assign [app_id="brave-browser"] 6
 for_window [app_id="brave-browser"] focus
 
-assign [app_id=thunar] 10
-for_window [app_id=thunar] focus
+assign [app_id="Thunar"] 10
+for_window [app_id="Thunar"] focus
 
 assign [app_id="org.telegram.desktop"] 5
 for_window [app_id="org.telegram.desktop"] focus
