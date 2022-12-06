@@ -66,7 +66,29 @@
 
 // => Center Modules {{{  
 
-  "modules-center": ["cpu", "memory", "custom/disk_root", "temperature", "clock", "idle_inhibitor", "sway/language"],
+  "modules-center": ["custom/github", "custom/scratchpad-indicator", "cpu", "memory", "custom/disk_root", "temperature", "clock", "idle_inhibitor", "sway/language", "custom/notification"],
+
+// => custom/github  {{{  
+"custom/github": {
+    "format": "{} ",
+    "return-type": "json",
+    "interval": 60,
+    "exec": "$HOME/.config/waybar/custom_modules/github.sh",
+    "on-click": "xdg-open https://github.com/notifications"
+},
+
+// }}}
+// => custom/scratchpad-indicator  {{{  
+  "custom/scratchpad-indicator": {
+    "interval": 3,
+    "return-type": "json",
+    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
+    "format": "{} <span color='#2ac3de'></span> ",
+    "on-click": "exec swaymsg 'scratchpad show'",
+    "on-click-right": "exec swaymsg 'move scratchpad'"
+},
+
+// }}}
 
 // => cpu {{{  
 
@@ -126,22 +148,22 @@
 // }}} 
 
 // => custom/notification {{{  
-// "custom/notification": {
-//    "tooltip": false,
-//    "format": "{icon}",
-//    "format-icons": {
-//      "notification": "<span foreground='red'><sup></sup></span>",
-//      "none": "",
-//      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-//      "dnd-none": ""
-//    },
-//    "return-type": "json",
-//    "exec-if": "which swaync-client",
-//    "exec": "swaync-client -swb",
-//    "on-click": "swaync-client -t -sw",
-//    "on-click-right": "swaync-client -d -sw",
-//    "escape": true
-//  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
 
 // }}} 
 

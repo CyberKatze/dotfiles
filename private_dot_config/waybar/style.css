@@ -35,6 +35,9 @@ window#waybar {
 /* => set margin for all{{{  */
 #clock,
 #language,
+#custom-notification,
+#custom-github,
+#custom-scratchpad-indicator,
 #battery,
 #cpu,
 #memory,
@@ -53,25 +56,6 @@ window#waybar {
     margin: 0 2px;
     padding-left: 5px;
     padding-right: 10px;
-}
-#clock:focus,
-#language:hover,
-#battery:hover,
-#cpu:hover,
-#memory:hover,
-#custom-disk_root:hover,
-#temperature:hover,
-#network:hover,
-#pulseaudio:hover,
-#custom-media:hover,
-#tray:hover,
-#mode:hover,
-#custom-menu:hover,
-#custom-media:hover,
-#custom-power:hover,
-#backlight:hover,
-#idle_inhibitor:hover {
-  background-color:red;
 }
 /* }}} */
 
@@ -198,6 +182,17 @@ window#waybar {
 
 #language {
   color: @Pink;
+}
+/* }}} */
+
+/* => custom-notification {{{  */
+
+#custom-notification.notification, #custom-notification.none {
+  color: @Yellow;
+}
+
+#custom-notification.dnd-none, #custom-notification.dnd-notification {
+  color: @Red;
 }
 /* }}} */
 
