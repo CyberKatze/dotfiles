@@ -1,0 +1,15 @@
+#!/bin/bash
+
+for arg in "$@"
+do
+  name=$(echo $arg | cut -d '.' -f1)
+  w=$(identify -format '%w' $arg)
+  h=$(identify -format '%h' $arg)
+  cx=$(echo "scale=1;$w/2"|bc)
+  cy=$(echo "scale=1;$h/2"|bc)
+  r=$cy
+  echo "$name $cx,$cy $r";
+  convert -size ${w}x${h} xc:Black -fill White -draw "circle $cx, $cy $r 1" -alpha Copy mask_temp.png;
+  convert $arg -gravity Center mask_temp.png -compose CopyOpacity -composite -trim ${name}_circle.png
+  rm mask_temp.png
+done;
