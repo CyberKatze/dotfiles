@@ -1,5 +1,6 @@
 # vim:foldmethod=marker 
 
+
 # Set Wallpaper {{{
 
 # Set random wallpaper every time you log in
@@ -8,13 +9,20 @@ exec_always $HOME/.config/sway/scripts/setwall random $HOME/Pictures/Wallpapers/
 #}}}
 
 # Apply gtk theming {{{
-exec_always ~/.config/sway/scripts/import-gsettings
+
+exec export $GTK_THEME=Ant:dark
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme ''
+    gsettings set org.gnome.desktop.interface icon-theme 'Tela-circle-purple'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Your cursor Theme'
+    gsettings set org.gnome.desktop.interface font-name 'Your font name'
+}
 
 # }}}
 
 # Default Font {{{
 
-font pango:CascydiaCove Nerd Font 12
+font pango:monospace 12
 
 # }}}
 
