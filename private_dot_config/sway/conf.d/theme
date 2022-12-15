@@ -4,7 +4,7 @@
 # Set Wallpaper {{{
 
 # Set random wallpaper every time you log in
-exec_always $HOME/.config/sway/scripts/setwall random $HOME/Pictures/Wallpapers/ -c sway
+exec_always $HOME/.config/sway/scripts/setwall $HOME/Pictures/Wallpapers/ 
 
 #}}}
 
