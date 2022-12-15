@@ -4,14 +4,13 @@
 
 # User config directory
 
-# GTK3 applications take a long time to start {{{
-  
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-#}}}
-include $HOME/.config/sway/conf.d/*
+include $HOME/.config/sway/conf.d/autostart_applications
+include $HOME/.config/sway/conf.d/conf
+include $HOME/.config/sway/conf.d/output
+include $HOME/.config/sway/conf.d/input
+include $HOME/.config/sway/conf.d/theme
+include $HOME/.config/sway/conf.d/application_defaults
+include $HOME/.config/sway/conf.d/clamshell
 
 # only enable this if every app you use is compatible with wayland
 # xwayland disable

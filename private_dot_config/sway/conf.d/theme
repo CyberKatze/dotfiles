@@ -1,10 +1,17 @@
 # vim:foldmethod=marker 
 
+# GTK3 applications take a long time to start {{{
+  
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+#}}}
 
 # Set Wallpaper {{{
-
+ 
 # Set random wallpaper every time you log in
-exec_always $HOME/.config/sway/scripts/setwall $HOME/Pictures/Wallpapers/ 
+output * bg $(find $HOME/Pictures/Wallpapers -type f | shuf -n 1) fill
 
 #}}}
 
