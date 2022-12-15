@@ -72,12 +72,8 @@ cmd sudomkfile %{{
   sudo $EDITOR $ans
 }}
 
-cmd setwallpaper ${{
- for x in $(xfconf-query --channel xfce4-desktop --list | grep last-image)
-do
-	xfconf-query --channel xfce4-desktop --property $x --set "$f"
-done
-read ans
+cmd setwallpaper %{{
+  setwall "$f"
 }}
 cmd fzf_jump ${{
   res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
