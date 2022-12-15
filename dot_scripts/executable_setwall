@@ -1,0 +1,107 @@
+#!/bin/bash
+
+  # Global variable
+  save="$HOME/Pictures/Wallpapers"
+
+_usage() {
+	echo ""
+  echo "usage: setwall [-s| --save <path>] (path_to_directory|path_to_picture...)" 
+	echo "If the path is directory ==> it will pick random image from that directory"
+	echo ""
+	echo "-s | --save <path> Save picture in <path> directory permanently"
+	echo "-h | --help        Show usage"
+	echo ""
+	echo "Default <save_path> is ~/Pictures/Wallpapers/"
+	echo "If path is not set, it will pick random wallpaper from <save_path>"
+	echo "Be Careful the content of <save_path> will be deleted if you set path"
+  echo "Doesn't work with '(' and ')' in name path name"
+}
+
+_set_random(){
+  local images=()
+  if [[ ${#@} -eq 0 || $1 == $save ]]; then
+    for i in "$(find "$save" -type f -exec file {} \; | awk -F ": " '$2 ~ /image/ {print $1}')"
+    do
+      images+=("$i")
+    done
+    if [[ ${#images[@]} -eq 0 ]]; then
+      echo "No image found in : $save"
+      exit
+    fi
+  else  
+    for i in "$@"
+    do
+      # Find the random image from a path
+      image="$(find "$i" -type f -exec file {} \; | awk -F: '$2 ~ /image/ {print $1}' | shuf -n 1)"
+
+      if [[ -z $image ]]; then
+        echo "no image was found in: $i"
+        exit
+      fi
+      images+=("$image") 
+    done
+    _make_permanent "${images[@]}"
+  fi
+  # random generator
+  local random=$$$(date +%s)
+  local image="${images[random % ${#images[@]}]}"
+  echo -e "\e[32;1m${image} Set as a wallpaper\e[0m"
+  swaymsg output "*" bg "$image" fill
+}
+
+_make_permanent(){
+  rm -f "$save"/*
+  for i in "$@"
+  do
+  cp "$i" "$save"
+  done
+  
+}
+
+_main() {
+
+  local paths=()
+  if [[ -d $save ]];then
+    mkdir -p $save
+  fi
+
+  local args=()
+  local random=false
+
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -s| --save)
+        save="$(readlink -f $2)"
+        shift # past argument
+        shift # past value
+        ;;
+      -h| --help)
+        _usage
+        shift # past argument
+        exit
+        ;;
+      *)
+        args+=("$1") # save positional arg
+        shift # past argument
+        ;;
+    esac
+  done
+
+
+  if [[ ! -d $save ]]; then
+    echo "There is no directory : $save" 
+  fi
+  for arg in "${args[@]}"
+  do
+    path=$(readlink -f "$arg")
+    if [[ ! -e "$path" ]]; then
+      echo "No such path: $path"
+      exit
+    fi
+    paths+=("$path")
+  done
+  _set_random "${paths[@]}"
+
+}
+_main "$@"
