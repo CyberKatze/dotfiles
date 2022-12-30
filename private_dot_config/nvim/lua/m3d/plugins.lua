@@ -81,7 +81,8 @@ return packer.startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig"
-  use "williamboman/nvim-lsp-installer"
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
   use "ray-x/lsp_signature.nvim"
   use "tamago324/nlsp-settings.nvim"
   use "b0o/SchemaStore.nvim"

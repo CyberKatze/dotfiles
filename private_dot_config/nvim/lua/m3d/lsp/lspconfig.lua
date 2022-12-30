@@ -21,7 +21,6 @@ M.setup = function(servers)
       lspconfig[server].setup(config(require("m3d.lsp.settings.sumneko_lua")))
     elseif server == "jsonls" then
       lspconfig[server].setup(config(require("m3d.lsp.settings.jsonls")))
-      print(config(require("m3d.lsp.settings.jsonls")))
     else
       lspconfig[server].setup(config())
     end
