@@ -1,10 +1,16 @@
 {{- $name := promptStringOnce . "name" "What is your full name?" -}}
 {{- $email := promptStringOnce . "email" "What is your email address?" -}}
 
+encryption: age
+
 data:
   name: {{ $name | quote }}
   email: {{ $email | quote }}
   editor: nvim
+
+age:
+  identity: ~/.key
+  recipient: "age1cjhsp4xjd3ghynfax39lzycwtdc5049xl6guhdlt8ezecmq4rpysmqyz5p"
 
 diff:
   exclude:  
