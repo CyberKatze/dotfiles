@@ -18,5 +18,9 @@ fi
 if [ ! -f /usr/local/bin/starship ]; then
   curl -sS https://starship.rs/install.sh | sh 2> /dev/null
 fi
-# Install plugin
+# Install fisher
+if ! command -v fisher &> /dev/null
+  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+  fisher install jorgebucaran/nvm.fish
+fi
 {{- end }}
