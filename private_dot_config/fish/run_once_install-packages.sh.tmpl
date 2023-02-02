@@ -16,13 +16,10 @@ fi
 
 # Install starship shell prompt
 if [ ! -f /usr/local/bin/starship ]; then
-  curl -sS https://starship.rs/install.sh | sh 2> /dev/null
+  curl -sS "https://starship.rs/install.sh" | sh 2> /dev/null;
 fi
 # Install fisher
-if ! command -v fisher &> /dev/null
-  then
-  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-  fisher install jorgebucaran/nvm.fish
-fi
+  fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher;
+  fisher install jorgebucaran/nvm.fish"
 
 {{- end }}
