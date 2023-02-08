@@ -49,6 +49,18 @@ exec swayidle -w\
   # Exit sway (logs you out of your Wayland session)
   bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
+  # Kill focused window
+  bindsym $mod+q kill
+
+  # Start your launcher
+  bindsym $mod+x exec $launcher
+
+  # Toggle control center
+  bindsym $mod+Shift+n exec swaync-client -t -sw
+
+  # Open cheatsheet
+  bindsym $mod+slash exec $term -e glow -p ~/.config/sway/cheatsheet.md 
+
 # Application {{{
 
   # Start a terminal
@@ -75,20 +87,6 @@ exec swayidle -w\
   bindsym $mod+o exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
   bindsym $mod+Ctrl+o workspace 3;exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
 
-  # Kill focused window
-  bindsym $mod+q kill
-
-  # Start your dmenu
-  bindsym $mod+d exec $menu
-
-  # Start your launcher
-  bindsym $mod+x exec $launcher
-
-  #Start emoji picker
-  bindsym $mod1+e exec /sbin/wofi-emoji
-
-  # Toggle control center
-  bindsym $mod+Shift+n exec swaync-client -t -sw
 
 # }}}
 
@@ -147,6 +145,7 @@ exec swayidle -w\
   bindsym $mod+Shift+$down move down
   bindsym $mod+Shift+$up move up
   bindsym $mod+Shift+$right move right
+
   # Ditto, with arrow keys
   bindsym $mod+Shift+Left move left
   bindsym $mod+Shift+Down move down
@@ -173,7 +172,7 @@ exec swayidle -w\
   # Toggle the current focus between tiling and floating mode
   bindsym $mod+Shift+space floating toggle
 
-  # Swap focus between the tiling area and the floating area
+  # Swtich the previously selected workspace
   bindsym $mod+space workspace back_and_forth
 
   # Move focus to the parent container
