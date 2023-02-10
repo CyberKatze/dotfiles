@@ -1,14 +1,14 @@
 # vim:foldmethod=marker 
 
 # Assign Workspaces {{{
-assign [app_id="firefox"] 6
-for_window [app_id="firefox"] focus
-
-assign [app_id="brave-browser"] 6
-for_window [app_id="brave-browser"] focus
-
-assign [app_id="org.telegram.desktop"] 5
-for_window [app_id="org.telegram.desktop"] focus
+# assign [app_id="firefox"] 6
+# for_window [app_id="firefox"] focus
+#
+# assign [app_id="brave-browser"] 6
+# for_window [app_id="brave-browser"] focus
+#
+# assign [app_id="org.telegram.desktop"] 5
+# for_window [app_id="org.telegram.desktop"] focus
 # }}}
 
 ## Set Floating {{{
@@ -20,10 +20,13 @@ for_window [app_id="blueman-manager"] floating enable,  resize set width 40 ppt 
 
 # set floating (nontiling) for special apps:
 for_window [class="Xsane" instance="xsane"] floating enable
-for_window [app_id="pavucontrol" ] floating enable, resize set width 40 ppt height 30 ppt
 for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Lxappearance"] floating enable, resize set width 60 ppt height 50 ppt
+for_window [app_id="pavucontrol" ] floating enable, resize set width 50 ppt height 40 ppt
+for_window [app_id="blueberry.py"] floating enable, resize set width 60 ppt height 60 ppt
+for_window [app_id="qv2ray"] move scratchpad, scratchpad show
+for_window [app_id="superProductivity"] move scratchpad, scratchpad show
 
 # Set floating for window roles
 for_window [window_role="pop-up"] floating enable

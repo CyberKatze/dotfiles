@@ -20,6 +20,9 @@ set $term kitty
 set $Browser "all_proxy=http://127.0.0.1:8889 brave  --enable-features=UseOzonePlatform --ozone-platform=wayland"
 set $code code
 set $music spotify
+set $telegram telegram-desktop
+set $obsidian "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+set $superproductivity "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
 
 # Your preferred application launcher
 set $launcher wofi --show=drun --lines=8 --prompt="" -W 600px 
@@ -63,30 +66,33 @@ exec swayidle -w\
 
 # Application {{{
 
-  # Start a terminal
+  # Start Terminal
   bindsym $mod+Return exec $term
   bindsym $mod+Ctrl+Return workspace 1;exec $term
 
-  # Start a Browser
-  bindsym $mod+g exec $Browser
-  bindsym $mod+Ctrl+g workspace 6;exec $Browser
+  # Start Browser
+  bindsym $mod+g exec $browser
+  bindsym $mod+Ctrl+g workspace 6;exec $browser
 
-  # Start a music
+  # Start Music
   bindsym $mod+m exec $music
   bindsym $mod+Ctrl+m workspace 4;exec $music
 
-  # Start a code
+  # Start Code
   bindsym $mod+c exec $code
   bindsym $mod+Ctrl+c workspace 7;exec $code
 
-  # Start a Superproductivity
-  bindsym $mod+apostrophe exec "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
-  bindsym $mod+Ctrl+apostrophe workspace 3;exec "superproductivity --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+  # Start Telegram
+  bindsym $mod+t exec $telegram
+  bindsym $mod+Ctrl+t workspace 5;exec $telegram
 
-  # Start a Obsidian
-  bindsym $mod+o exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
-  bindsym $mod+Ctrl+o workspace 3;exec "obsidian --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+  # Start Superproductivity
+  bindsym $mod+apostrophe exec $superproductivity
+  bindsym $mod+Ctrl+apostrophe workspace 3;exec $superproductivity 
 
+  # Start Obsidian
+  bindsym $mod+o exec $obsidian 
+  bindsym $mod+Ctrl+o workspace 3;layout tabbed;exec $obsidian 
 
 # }}}
 
