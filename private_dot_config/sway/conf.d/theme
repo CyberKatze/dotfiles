@@ -11,7 +11,7 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 # Set Wallpaper {{{
  
 # Set random wallpaper every time you log in
-output * bg $(find $HOME/Pictures/Wallpapers -type f | shuf -n 1) fill
+output * bg "$(find $HOME/Pictures/Wallpapers -type f -exec file {} \; | awk -F: '$2 ~ /image/ {print $1}' | shuf -n 1)" fill
 
 #}}}
 

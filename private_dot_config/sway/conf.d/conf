@@ -17,7 +17,7 @@ set $right l
 
 # Applications
 set $term kitty
-set $Browser "all_proxy=http://127.0.0.1:8889 brave  --enable-features=UseOzonePlatform --ozone-platform=wayland"
+set $browser "all_proxy=http://127.0.0.1:8889 brave  --enable-features=UseOzonePlatform --ozone-platform=wayland"
 set $code code
 set $music spotify
 set $telegram telegram-desktop
