@@ -59,9 +59,11 @@ window {
     /* border: 2px solid cyan; */
     /* background-color: cyan; */
 }
+
 #entry{
 
     border-left: 3px solid transparent; 
+    background-color: @Background;
 }
 
 #entry:selected {
