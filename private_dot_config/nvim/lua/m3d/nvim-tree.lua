@@ -13,7 +13,7 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
-renderer = {
+  renderer = {
     add_trailing = false,
     group_empty = false,
     highlight_git = false,
@@ -72,12 +72,6 @@ renderer = {
   },
   disable_netrw = false,
   hijack_netrw = true,
-  open_on_setup = false,
-  ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
-    "alpha",
-  },
   open_on_tab = false,
   hijack_cursor = false,
   update_cwd = true,
@@ -115,7 +109,7 @@ renderer = {
     mappings = {
       custom_only = false,
       list = {
-        { key = {"<CR>", "o" }, action = "edit", mode = "n"},
+        { key = { "<CR>", "o" }, action = "edit", mode = "n" },
         { key = "h", cb = tree_cb "close_node" },
         { key = "v", cb = tree_cb "vsplit" },
       },
