@@ -103,7 +103,7 @@
 // => memory {{{  
 
   "custom/memory": {
-    "format": " {}G <span color='#2ac3de'></span>",
+    "format": " {} <span color='#2ac3de'></span>",
     "return-type": "json",
     "interval": 5,
     "exec": "$HOME/.config/waybar/custom_modules/memory.sh",
