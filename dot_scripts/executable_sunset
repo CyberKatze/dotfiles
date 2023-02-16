@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if [ -z $(pgrep wlsunset) ]
+if [ -z $(pgrep gammastep) ]
 then
- nohup wlsunset -l 34.79 -L 48.51 2>/dev/null & 
+ nohup gammastep -b 0.8:0.8 -O 3500k 2>/dev/null & 
 else
-  pkill wlsunset
+  pkill -9 gammastep
 fi
 exit 0
 
