@@ -94,6 +94,11 @@ window#waybar {
   color: @Cyan;
   border-bottom: 2px solid @Cyan;
 }
+#workspaces button.active {
+  background-color: @Selection;
+  color: @Cyan;
+  border-bottom: 2px solid @Cyan;
+}
 
 
 /* }}} */

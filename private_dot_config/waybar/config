@@ -1,17 +1,26 @@
 // vim:foldmethod=marker
 {
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 30,
 
 // => Left Modules {{{  
 
-  "modules-left": ["sway/workspaces", "custom/media"],
+  "modules-left": ["hyprland/workspaces", "custom/media"],
 
-// => sway/workspaces {{{  
+// => wlr/workspaces {{{  
 
-  "sway/workspaces": {
-     "disable-scroll": true,
-     "all-outputs": false,
-     "format": "{icon}",
-     "format-icons": {
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "all-outputs": false,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
        "1": "",
        "2": "",
        "3": "",
@@ -66,7 +75,7 @@
 
 // => Center Modules {{{  
 
-  "modules-center": ["custom/github", "custom/scratchpad-indicator", "cpu", "custom/memory", "custom/disk_root", "temperature", "clock", "idle_inhibitor", "sway/language", "custom/notification"],
+  "modules-center": ["custom/github", "cpu", "custom/memory", "custom/disk_root", "temperature", "clock", "idle_inhibitor", "hyprland/language"],
 
 // => custom/github  {{{  
 "custom/github": {
@@ -80,14 +89,14 @@
 // }}}
 
 // => custom/scratchpad-indicator  {{{  
-  "custom/scratchpad-indicator": {
-    "interval": 3,
-    "return-type": "json",
-    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
-    "format": "{} <span color='#2ac3de'></span> ",
-    "on-click": "exec swaymsg 'scratchpad show'",
-    "on-click-right": "exec swaymsg 'move scratchpad'"
-},
+//  "custom/scratchpad-indicator": {
+//    "interval": 3,
+//    "return-type": "json",
+//    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
+//    "format": "{} <span color='#2ac3de'></span> ",
+//    "on-click": "exec swaymsg 'scratchpad show'",
+//    "on-click-right": "exec swaymsg 'move scratchpad'"
+//},
 
 // }}}
 
@@ -153,30 +162,35 @@
 // }}} 
 
 // => custom/notification {{{  
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
+//  "custom/notification": {
+//    "tooltip": false,
+//    "format": "{icon}",
+//    "format-icons": {
+//      "notification": "<span foreground='red'><sup></sup></span>",
+//      "none": "",
+//      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+//      "dnd-none": ""
+//    },
+//    "return-type": "json",
+//    "exec-if": "which swaync-client",
+//    "exec": "swaync-client -swb",
+//    "on-click": "swaync-client -t -sw",
+//    "on-click-right": "swaync-client -d -sw",
+//    "escape": true
+//  },
 
 // }}} 
 
 // => language {{{  
 
-  "sway/language": {
-      "format": "{shortDescription}",
-      },
+     "hyprland/language": {
+         "interval": 3,
+         "format": " {}",
+         "format-en": "en",
+         "format-de": "de",
+         "format-fa": "fa",
+         "tooltip": false,
+     },
 
 // }}} 
 
@@ -184,7 +198,7 @@
 
   "idle_inhibitor": {
       "format": "{icon}",
-      "on-click": "/home/m3d/.scripts/sunset",
+      "on-click": "$HOME/.scripts/sunset",
       "format-icons": {
         "activated": "",
         "deactivated": ""
@@ -198,7 +212,7 @@
 
 // => Right Modules {{{  
 
-  "modules-right": [ "tray","network#wifi",  "pulseaudio","backlight", "battery", "custom/power"],
+  "modules-right": [ "tray","network#wifi",  "pulseaudio","backlight", "battery"],
 
 // => tray {{{  
 
@@ -260,23 +274,21 @@
 // => backlight {{{  
 
   "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon}",
-    "format-alt": "{percent}% {icon}",
-    "format-alt-click": "click-left",
-    "on-scroll-up": "light -A 5",
-    "on-scroll-down": "light -U 5",
-    "format-icons": ["", ""]
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", ""],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
   },
   
 // }}} 
 
 // => custom/power {{{  
 
-  "custom/power": {
-    "format": "",
-    "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
-  },
+//  "custom/power": {
+//    "format": "",
+//    "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+//  },
 
 // }}} 
 
