@@ -20,7 +20,7 @@ M.servers = {
   -- "jdtls",
   "jsonls",
   "solc",
-  "sumneko_lua",
+  "lua_ls",
   "tflint",
   "tsserver",
   "pyright",

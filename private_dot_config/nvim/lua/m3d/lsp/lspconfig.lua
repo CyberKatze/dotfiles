@@ -17,7 +17,7 @@ end
 M.setup = function(servers)
   -- all the general lspconfig config is in handlers
   for _, server in pairs(servers) do
-    if server == "sumneko_lua" then
+    if server == "lua_ls" then
       lspconfig[server].setup(config(require("m3d.lsp.settings.sumneko_lua")))
     elseif server == "jsonls" then
       lspconfig[server].setup(config(require("m3d.lsp.settings.jsonls")))
