@@ -2,17 +2,17 @@
 
 #: Basic Settings {{{
 
-set ratios 1:2:3
+# set ratios 1:2:3
 #set cleaner ~/.config/lf/cleaner_kitty.sh
 #set previewer ~/.config/lf/preview_kitty.sh
-set previewer stpv
-set cleaner stpvimgclr
-&stpvimg --listen $id
-cmd on-quit $stpvimg --end $id
-set preview true
-set hidden true
-set drawbox true
-set icons true
+# set previewer stpv
+# set cleaner stpvimgclr
+# &stpvimg --listen $id
+# cmd on-quit $stpvimg --end $id
+# set preview true
+# set hidden true
+# set drawbox true
+# set icons true
 set ignorecase true
 
 #: }}}
@@ -76,7 +76,7 @@ cmd setwallpaper %{{
   setwall "$f"
 }}
 cmd fzf_jump ${{
-  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
+  res="$(find . -maxdepth 6 | fzf --reverse --header='Jump to location')"
   if [ -f "$res" ]; then
     cmd="select"
   elif [ -d "$res" ]; then
@@ -110,9 +110,9 @@ cmd broot_jump ${{
 }}
 
 
-cmd dragon %dragon-drag-and-drop -a -x $fx
-cmd dragon-stay &dragon-drag-and-drop -a $fx 
-cmd dragon-individual %dragon-drag-and-drop $fx
+cmd dragon %dragon-drop -a -x $fx
+cmd dragon-stay &dragon-drop -a $fx 
+cmd dragon-individual %dragon-drop $fx
 cmd cpdragon %cpdragon
 cmd mvdragon %mvdragon
 cmd dlfile %dlfile
