@@ -8,6 +8,7 @@ set PATH $PATH $HOME/.cargo/bin
 set PATH $PATH $HOME/.yarn/bin
 set PATH $PATH $HOME/.local/bin
 set PATH $PATH $HOME/.miniconda3/bin
+set PATH $PATH $HOME/.ghcup/env
 if test -e $HOME/.scripts
   set PATH $PATH (find $HOME/.scripts/ -type d ) 
 end
@@ -30,10 +31,9 @@ if not test -z WAYLAND_DISPLAY
   set -Ux SDL_VIDEODRIVER wayland
   set -Ux _JAVA_AWT_WM_NONREPARENTING 1
   set -Ux QT_QPA_PLATFORM wayland
-  set -Ux XDG_CURRENT_DESKTOP sway
-  set -Ux XDG_SESSION_DESKTOP sway
 end
 set -gx EDITOR (which nvim) 
+set -gx OPENAI_API_KEY (cat ~/.openai) 
 set -gx GOPATH ~/.go
 
 #Add icons to LF_ICONS Variable for lf
@@ -60,9 +60,9 @@ alias tlmgr "/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
 # Init {{{
 
 # Start sway 
-if test -z $DISPLAY; and test (tty) = "/dev/tty1"
-    sway
-end
+# if test -z $DISPLAY; and test (tty) = "/dev/tty1"
+#     sway
+# end
 
 # init for startship
 starship init fish | source
@@ -70,7 +70,11 @@ fish_vi_key_bindings
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-#eval /home/m3d/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
+function conda-init
+  if test -f /home/ck/.miniconda3/bin/conda
+      eval /home/ck/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
+  end
+end
 # <<< conda initialize <<<
 
 # }}}
