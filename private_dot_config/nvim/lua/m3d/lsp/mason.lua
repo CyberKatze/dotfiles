@@ -28,6 +28,7 @@ M.servers = {
   "bashls",
   "clangd",
   "texlab",
+  "elixirls",
   -- "rust_analyzer",
   -- "taplo",
 }
@@ -47,10 +48,10 @@ local settings = {
 
 mason.setup(settings)
 mason_lspconfig.setup {
-  ensure_installed = M.servers,
-  automatic_installation = true,
+  ensure_installed = {
+    "elixirls",
+  },
+  automatic_installation = false,
 }
-
-
 
 return M

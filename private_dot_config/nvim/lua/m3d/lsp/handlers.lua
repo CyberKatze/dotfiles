@@ -31,7 +31,6 @@ M.setup = function()
   }
 
   vim.diagnostic.config(config)
-
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
   })
@@ -51,7 +50,7 @@ local function lsp_highlight_document(client)
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]] ,
+    ]],
       false
     )
   end
@@ -68,9 +67,9 @@ local function lsp_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true }
   local rc = client.server_capabilities
   -- Print all the server capabilities
-  -- for k, _ in pairs(client.server_capabilities) do
-  --    print(k)
-  --  end
+  --[[ for k, _ in pairs(client.server_capabilities) do ]]
+  --[[   print(k) ]]
+  --[[ end ]]
   map_cond(rc.declarationProvider, bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- not Sure about this one
   map_cond(rc.definitionProvider, bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   map_cond(rc.implementationProvider, bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
@@ -91,7 +90,6 @@ local function lsp_keymaps(client, bufnr)
   -- you can use <leader>lf for formatting
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
-
 M.on_attach = function(client, bufnr)
   -- if client.name == "tsserver" then
   --   -- Disable the tsserver formating for null-ls
@@ -110,5 +108,4 @@ if not status_ok then
 end
 
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
 return M
